@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:todoey/components/fab.dart';
+import 'package:todoey/components/task_list.dart';
 import 'package:todoey/constants/constants.dart';
+import 'package:todoey/screens/add_task.dart';
 
 class TasksScreen extends StatelessWidget {
-  // List<String> tasks = ['halwa', 'jai shri ram'];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.lightBlue[200],
+      backgroundColor: Colors.lightBlue[400],
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
-            padding: EdgeInsets.fromLTRB(30, 80, 30, 0),
+            padding: EdgeInsets.fromLTRB(40, 80, 30, 0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -32,24 +32,25 @@ class TasksScreen extends StatelessWidget {
           ),
           Expanded(
             child: Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(20),
-                    topRight: Radius.circular(20)),
-                color: Colors.white,
-              ),
+              decoration: kDecoration,
               padding: EdgeInsets.fromLTRB(25, 25, 25, 10),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  Text('data'),
-                ],
-              ),
+              child: TasksList(),
             ),
           ),
         ],
       ),
-      floatingActionButton: MyFloatingActionButton(),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.add),
+        backgroundColor: Colors.lightBlue[400],
+        onPressed: () {
+          showModalBottomSheet(
+            context: context,
+            builder: (context) {
+              return AddTaskScreen();
+            },
+          );
+        },
+      ),
     );
   }
 }
