@@ -1,21 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:todoey/components/task_list.dart';
 import 'package:todoey/constants/constants.dart';
-import 'package:todoey/models/task.dart';
+import 'package:todoey/models/task_data.dart';
 import 'package:todoey/screens/add_task.dart';
 
-List<Task> tasks = [
-  Task(name: 'Buy halwa', isDone: false),
-  Task(name: 'Buy ghee', isDone: false),
-  Task(name: 'Buy mithai', isDone: false),
-];
-
-class TasksScreen extends StatefulWidget {
-  @override
-  _TasksScreenState createState() => _TasksScreenState();
-}
-
-class _TasksScreenState extends State<TasksScreen> {
+class TasksScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,7 +25,7 @@ class _TasksScreenState extends State<TasksScreen> {
                 ),
                 SizedBox(height: 25),
                 Text('Todoey', style: kTaskScreenTextStyle),
-                Text('${tasks.length} Tasks',
+                Text('${Provider.of<TaskData>(context).taskCount} Tasks',
                     style: kTaskScreenTextStyle.copyWith(
                         fontSize: 20, fontWeight: FontWeight.normal)),
                 SizedBox(height: 40),
@@ -46,7 +36,7 @@ class _TasksScreenState extends State<TasksScreen> {
             child: Container(
               decoration: kDecoration,
               padding: EdgeInsets.fromLTRB(25, 25, 25, 10),
-              child: TasksList(tasks: tasks),
+              child: TasksList(),
             ),
           ),
         ],
@@ -65,10 +55,10 @@ class _TasksScreenState extends State<TasksScreen> {
                       bottom: MediaQuery.of(context).viewInsets.bottom),
                   child: AddTaskScreen(
                     addTaskCallback: (newTask) {
-                      setState(() {
-                        tasks.add(Task(name: newTask));
-                        Navigator.pop(context);
-                      });
+                      // setState(() {
+                      //   tasks.add(Task(name: newTask));
+                      //   Navigator.pop(context);
+                      // });
                     },
                   ),
                 ),
